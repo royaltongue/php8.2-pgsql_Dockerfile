@@ -1,4 +1,3 @@
 FROM php:8.2-fpm
-RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
-RUN docker-php-ext-enable mysqli
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions gd xdebug pdo_pgsql @composer
